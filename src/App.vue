@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="card p-5 mb-4 text-left">
-            <h4>Users</h4>
+            <h5 class="title__3">Users</h5>
             <p class="text-left mb-0">
               <strong>Get Users with axios on created()</strong>
             </p>
@@ -13,16 +13,16 @@ axios
 .get("https://jsonplaceholder.typicode.com/users")
 .then(response => (this.users = response.data));
           </pre>
-
-            <a class="btn" @click="removeUser()">Delete User</a>
+            <transition name="fade">
+              <a v-if="user" class="btn btn-2" @click="removeUser()">Delete User</a>
+            </transition>
           </div>
         </div>
-        <div class="col-sm-6" v-if="user">
-          <div class="card p-5 mb-4 text-left">
-            <h5>Selected user:</h5>
-            <p>{{ user.name }}</p>
+        <transition name="fade">
+          <div class="col-sm-6" v-if="user && !isLoading">
+            <selected-user :user="selectedUser"></selected-user>
           </div>
-        </div>
+        </transition>
       </div>
     </div>
 
@@ -38,15 +38,19 @@ axios
 
 <script>
 import UserDetails from "./components/UserDetails";
+import SelectedUser from "./components/SelectedUser";
 import axios from "axios";
 export default {
   name: "App",
   components: {
-    UserDetails
+    UserDetails,
+    SelectedUser
   },
   data: () => ({
     users: null,
-    user: null
+    user: null,
+    selectedUser: null,
+    isLoading: false
   }),
   methods: {
     removeUser() {
@@ -54,13 +58,15 @@ export default {
     },
     getUser(user) {
       this.user = user;
-      // Do axios call for the `car` object
+      this.selectedUser = user;
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+        const { company, address, ...selectedUser } = this.user;
+        console.log(selectedUser);
+        //console.log(rest);
+      }, 20);
     }
-    //   handleSelectUser(user) {
-    //    this.selectedUser = this.user.name;
-    //    return console.log(this.selectedUser);
-    //    you can also handle toggle action here manually to open and close dropdown
-    //  }
   },
   beforeCreate() {
     this.user = null;
@@ -85,5 +91,28 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
 }
 </style>
