@@ -1,5 +1,5 @@
 <template>
-  <div class="card p-5 mb-4 text-left">
+  <div class="card main__card p-5 mb-4 text-left">
     <h5 class="title__3">Selected user</h5>
     <p>{{ user.name }}</p>
     <ul class="list-group">
@@ -30,6 +30,19 @@ export default {
   font-size: 1.4em;
   font-weight: 600;
   font-family: "Open Sans", sans-serif;
+}
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0;
+  background-color: #fff;
+  border: none;
+  font-size: 13px;
+  padding: 0.6em 0em;
+}
+.card {
+  min-height: 360px;
+  height: auto;
 }
 </style>
 

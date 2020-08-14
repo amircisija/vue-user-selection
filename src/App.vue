@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <div class="card p-5 mb-4 text-left">
+          <div class="card main__card p-5 mb-4 text-left">
             <h5 class="title__3">Users</h5>
             <p class="text-left mb-0">
               <strong>Get Users with axios on created()</strong>
@@ -114,5 +114,9 @@ export default {
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
+}
+.card.main__card {
+  min-height: 360px;
+  height: auto;
 }
 </style>
