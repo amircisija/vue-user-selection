@@ -6,7 +6,7 @@
         <p
           class="card-text"
         >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a class="btn btn-primary" @click="handleSelectUser(user)">Select User</a>
+        <a class="btn btn-1" @click="handleSelectUser(user)">Select User</a>
       </div>
     </div>
   </div>
@@ -43,6 +43,10 @@ export default {
     font-weight: 600;
     font-family: "Open Sans", sans-serif;
   }
+}
+.btn-1 {
+  box-shadow: rgba(70, 201, 58, 0.5) 0px 20px 35px -10px;
+  background: #46c93a;
 }
 </style>
 
